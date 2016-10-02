@@ -7,7 +7,7 @@
 class HelperThread : public QThread
 {
 public:
-    HelperThread();
+    HelperThread(QObject *parent);
     void run();
 };
 

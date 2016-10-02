@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include <QApplication>
 #include "clientapp.h"
 
@@ -14,6 +14,8 @@ int main(int argc, char *argv[])
     // user athentication
 
     // lauch main window
+
+
     MainWindow w;
     w.show();
 

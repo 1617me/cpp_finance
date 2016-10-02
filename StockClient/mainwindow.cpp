@@ -6,6 +6,7 @@
 
 #include <zmq.h>
 #include <QDebug>
+#include <QEvent>
 #include <errno.h>
 #include <QThread>
 
@@ -16,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
 
-    HelperThread *helpThread = new HelperThread;
+    HelperThread *helpThread = new HelperThread(this);
     helpThread->start();
 
 
@@ -26,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Q_ASSERT(subscriber);
     int rc = zmq_setsockopt(subscriber,ZMQ_SUBSCRIBE,nullptr,0);
     Q_ASSERT(rc == 0);
-    rc = zmq_connect(subscriber,"tcp://localhost:5555");
+    rc = zmq_connect(subscriber,"tcp://localhost:10008");
         Q_ASSERT(rc == 0);
     startTimer(1000);
 
@@ -41,6 +42,14 @@ MainWindow::~MainWindow()
     zmq_close(subscriber);
     delete ui;
 }
+
+bool MainWindow::event(QEvent *event){
+    static int i = 0;
+    if(event->type() == QEvent::User){
+        qDebug() << "recv event" << i++ << endl;
+    }
+}
+
 void MainWindow::timerEvent(QTimerEvent *event)
 {
     qDebug()<<"------------------------------------------"<<count++<<"-------------------------------------------"<<endl;

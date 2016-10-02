@@ -15,11 +15,13 @@ CONFIG += c++11
 SOURCES += main.cpp\
         mainwindow.cpp \
     clientapp.cpp \
-    HelperThread.cpp
+    HelperThread.cpp \
+    MESendEvent.cpp
 
 HEADERS  += mainwindow.h \
     clientapp.h \
-    HelperThread.h
+    HelperThread.h \
+    MESendEvent.h
 
 FORMS    += mainwindow.ui
 
